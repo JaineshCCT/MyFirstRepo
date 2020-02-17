@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Form_City.Models.CityModel
+@ViewBag.Error
+<html>
+<head id="Head1" runat="server">
+    <title>
+        City Create
+    </title>
+</head>
+
+<body>
+    <h3><strong>@TempData["Message"]</strong></h3>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="form-horizontal">
+            <fieldset>
+                <legend><h1>Enter the details of City</h1></legend>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ShortCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ShortCode)
+                        @Html.ValidationMessageFor(m => m.ShortCode)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CityName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.CityName)
+                        @Html.ValidationMessageFor(m => m.CityName)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Country", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.CountryId, new SelectList(new Form_City.Models.CountryViewModel().GetCountries(), "Id", "Name"))
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.StateId, new SelectList(new Form_City.Models.StateViewModel().GetState(), "Id", "Name"))
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    }
+    <div class="col-md-offset-1">
+        @Html.ActionLink("Show The List", "IndexCity")
+    </div>
+
+</body>
+</html>
